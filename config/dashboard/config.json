@@ -1,0 +1,21 @@
+{
+  "port": 3010,
+  "node": {
+    "host": "node1",
+    "port": 8332,
+    "user": "${YUL_RPC_USER}",
+    "password": "${YUL_RPC_PASSWORD}"
+  },
+  "refresh": {
+    "interval": 10000,
+    "blocks": true,
+    "mempool": true,
+    "peers": true
+  },
+  "features": {
+    "mining": true,
+    "transactions": true,
+    "peers": true,
+    "mempool": true
+  }
+}

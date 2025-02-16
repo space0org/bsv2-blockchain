@@ -1,0 +1,40 @@
+# YUL Blockchain Node Configuration
+# Based on Bitcoin SV v1.1.0
+
+# Network Configuration
+port=8333
+rpcport=8332
+listen=1
+server=1
+rest=1
+txindex=1
+
+# Performance Settings
+dbcache=16384
+maxmempool=2000
+maxsigcachesize=260
+maxscriptcachesize=260
+
+# Consensus Parameters
+excessiveblocksize=2000000000
+maxstackmemoryusageconsensus=200000000
+genesisactivationheight=1
+
+# Mining Configuration
+minminingtxfee=0.00000050
+blockmaxsize=512000000
+
+# ZMQ Configuration
+zmqpubhashblock=tcp://*:28332
+zmqpubhashtx=tcp://*:28332
+
+# Security Settings
+rpcthreads=24
+rpcworkqueue=600
+maxorphantx=100000
+invalidtxsink=ZMQ
+
+# RPC Configuration
+rpcuser=${YUL_RPC_USER}
+rpcpassword=${YUL_RPC_PASSWORD}
+rpcallowip=0.0.0.0/0

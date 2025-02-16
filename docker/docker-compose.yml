@@ -1,0 +1,57 @@
+version: '3.8'
+services:
+  node1:
+    image: bitcoinsv/bitcoin-sv:1.1.0
+    container_name: yul-node1
+    volumes:
+      - ../config/bitcoin.conf:/data/bitcoin.conf:ro
+      - node1_data:/data
+    ports:
+      - "8333:8333"
+      - "8332:8332"
+      - "28332:28332"
+    networks:
+      - yul-network
+    healthcheck:
+      test: ["CMD", "bitcoin-cli", "-conf=/data/bitcoin.conf", "getblockchaininfo"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  mapi:
+    image: bitcoinsv/mapi:1.3.0
+    container_name: yul-mapi
+    depends_on:
+      - node1
+    ports:
+      - "9014:80"
+    environment:
+      - AppSettings__MinerIdServer__Url=http://minerid:9002/minerid
+    networks:
+      - yul-network
+
+  dashboard:
+    image: jwahab/regtest-dashboard:latest
+    container_name: yul-dashboard
+    volumes:
+      - ../config/dashboard:/config:ro
+    environment:
+      DASH_PORT: 3010
+      SV_HOST: node1
+      SV_PORT: 8332
+      SV_USER: ${YUL_RPC_USER}
+      SV_PASSWORD: ${YUL_RPC_PASSWORD}
+    ports:
+      - "3010:3000"
+    depends_on:
+      - node1
+    networks:
+      - yul-network
+
+networks:
+  yul-network:
+    name: yul-network
+
+volumes:
+  node1_data:
+    name: yul-node1-data
