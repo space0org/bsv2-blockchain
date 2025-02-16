@@ -15,7 +15,8 @@ namespace Consensus {
  */
 struct Params {
     uint256 hashGenesisBlock;
-    int nSubsidyHalvingInterval;
+    // Modified halving interval for new blockchain (every 105,000 blocks, ~2 years)
+    int nSubsidyHalvingInterval = 105000;
     /** Block height and hash at which BIP34 becomes active */
     int32_t BIP34Height;
     uint256 BIP34Hash;
@@ -46,8 +47,10 @@ struct Params {
     uint256 powLimit;
     bool fPowAllowMinDifficultyBlocks;
     bool fPowNoRetargeting;
-    int64_t nPowTargetSpacing;
-    int64_t nPowTargetTimespan;
+    // Modified target spacing (5 minutes between blocks)
+    int64_t nPowTargetSpacing = 5 * 60;
+    // Modified target timespan (3.5 days)
+    int64_t nPowTargetTimespan = 3.5 * 24 * 60 * 60;
     int64_t DifficultyAdjustmentInterval() const {
         return nPowTargetTimespan / nPowTargetSpacing;
     }

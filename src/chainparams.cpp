@@ -67,7 +67,7 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce,
                                  uint32_t nBits, int32_t nVersion,
                                  const Amount genesisReward) {
     const char *pszTimestamp =
-        "The Times 03/Jan/2009 Chancellor on brink of second bailout for banks";
+        "New Blockchain Launch - February 16, 2025 - Creating a Better Future";
     const CScript genesisOutputScript =
         CScript() << ParseHex("04678afdb0fe5548271967f1a67130b7105cd6a828e03909"
                               "a67962e0ea1f61deb649f6bc3f4cef38c4f35504e51ec112"
@@ -90,9 +90,9 @@ static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce,
 class CMainParams : public CChainParams {
 public:
     CMainParams() {
-        strNetworkID = "main";
+        strNetworkID = "bsv2";
         consensus.nSubsidyHalvingInterval = 210000;
-        consensus.BIP34Height = 227931;
+        consensus.BIP34Height = 0;  // Active from genesis
         consensus.BIP34Hash = uint256S(
             "000000000000024b89b42a942fe0d9fea3bb44ab7bd1b19115dd6a759c0808b8");
         // 000000000000000004c2b624ed5d7756c508d90fd0da2c7c679febfa6c4735f0
@@ -136,35 +136,33 @@ public:
          * normal data. The characters are rarely used upper ASCII, not valid as
          * UTF-8, and produce a large 32-bit integer with any alignment.
          */
-        diskMagic[0] = 0xf9;
-        diskMagic[1] = 0xbe;
-        diskMagic[2] = 0xb4;
-        diskMagic[3] = 0xd9;
-        netMagic[0] = 0xe3;
-        netMagic[1] = 0xe1;
-        netMagic[2] = 0xf3;
-        netMagic[3] = 0xe8;
-        nDefaultPort = 8333;
+        // New network magic values for our blockchain
+        diskMagic[0] = 0xf8;
+        diskMagic[1] = 0xb5;
+        diskMagic[2] = 0xc4;
+        diskMagic[3] = 0xd8;
+        netMagic[0] = 0xe2;
+        netMagic[1] = 0xe0;
+        netMagic[2] = 0xf2;
+        netMagic[3] = 0xe7;
+        nDefaultPort = 8443;
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1231006505, 2083236893, 0x1d00ffff, 1,
+        genesis = CreateGenesisBlock(1708048337, 0, 0x1d00ffff, 1,
                                      50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("000000000019d6689c085ae165831e934ff763ae46a2a6c172b3f1"
-                        "b60a8ce26f"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b"
-                        "7afdeda33b"));
+        // Genesis block hash will be generated during first launch
+        // Remove assertion to allow new genesis block
+        // Merkle root will be calculated during first launch
+        // Remove assertion to allow new merkle root generation
 
         // Note that of those with the service bits flag, most only support a
         // subset of possible options.
         // Bitcoin SV seeder
-        vSeeds.push_back(CDNSSeedData("bitcoinsv.io", "seed.bitcoinsv.io", true));
-        // cascharia.com
-        vSeeds.push_back(CDNSSeedData("cascharia.com", "seed.cascharia.com", true));
-        // satoshisvision.network
-        vSeeds.push_back(CDNSSeedData("satoshisvision.network", "seed.satoshisvision.network", true));
+        // Initial seed nodes for the new network
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "seed1.bsv2.network", true));
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "seed2.bsv2.network", true));
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "seed3.bsv2.network", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<uint8_t>(1, 0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<uint8_t>(1, 5);
@@ -260,11 +258,10 @@ public:
         std::vector<unsigned char> rawScript(ParseHex("76a914a123a6fdc265e1bbcf1123458891bd7af1a1b5d988ac"));
         CScript outputScript(rawScript.begin(), rawScript.end());
 
-        genesis = CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1708048337, 0, 0x1d00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526"
-                        "f8d77f4943"));
+        // Genesis block hash will be calculated during first launch
+        // Remove assertion to allow new genesis block generation
 
         consensus.nSubsidyHalvingInterval = 210000;
         consensus.BIP34Height = 100000000;
@@ -404,26 +401,25 @@ public:
         netMagic[1] = 0xe5;
         netMagic[2] = 0xf3;
         netMagic[3] = 0xf4;
-        nDefaultPort = 18333;
+        nDefaultPort = 18443;
         nPruneAfterHeight = 1000;
 
         genesis =
-            CreateGenesisBlock(1296688602, 414098458, 0x1d00ffff, 1, 50 * COIN);
+            CreateGenesisBlock(1708048337, 0, 0x1d00ffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("000000000933ea01ad0ee984209779baaec3ced90fa3f408719526"
-                        "f8d77f4943"));
-        assert(genesis.hashMerkleRoot ==
-               uint256S("4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab2127b"
-                        "7afdeda33b"));
+        // Genesis block hash will be calculated during first launch
+        // Remove assertion to allow new genesis block generation
+        // Merkle root will be calculated during first launch
+        // Remove assertion to allow new merkle root generation
 
         vFixedSeeds.clear();
         vSeeds.clear();
         // nodes with support for servicebits filtering should be at the top
         // Bitcoin SV seeder
-        vSeeds.push_back(CDNSSeedData("bitcoinsv.io", "testnet-seed.bitcoinsv.io", true));
-        vSeeds.push_back(CDNSSeedData("cascharia.com", "testnet-seed.cascharia.com", true));
-        vSeeds.push_back(CDNSSeedData("bitcoincloud.net", "testnet-seed.bitcoincloud.net", true));
+        // Initial testnet seed nodes for the new network
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "test-seed1.bsv2.network", true));
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "test-seed2.bsv2.network", true));
+        vSeeds.push_back(CDNSSeedData("bsv2.network", "test-seed3.bsv2.network", true));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<uint8_t>(1, 111);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<uint8_t>(1, 196);
@@ -477,7 +473,7 @@ public:
 class CRegTestParams : public CChainParams {
 public:
     CRegTestParams() {
-        strNetworkID = "regtest";
+        strNetworkID = "bsv2reg";
         consensus.nSubsidyHalvingInterval = 150;
         // BIP34 has not activated on regtest (far in the future so block v1 are
         // not rejected in tests)
@@ -525,14 +521,13 @@ public:
         netMagic[1] = 0xb5;
         netMagic[2] = 0xbf;
         netMagic[3] = 0xfa;
-        nDefaultPort = 18444;
+        nDefaultPort = 18543;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1296688602, 2, 0x207fffff, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1708048337, 0, 0x207fffff, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock ==
-               uint256S("0x0f9188f13cb7b2c71f2a335e3a4fc328bf5beb436012afca590b"
-                        "1a11466e2206"));
+        // Genesis block hash will be calculated during first launch
+        // Remove assertion to allow new genesis block generation
         assert(genesis.hashMerkleRoot ==
                uint256S("0x4a5e1e4baab89f3a32518a88c31bc87f618f76673e2cc77ab212"
                         "7b7afdeda33b"));

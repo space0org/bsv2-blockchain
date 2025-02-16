@@ -23,9 +23,9 @@ static const uint64_t ONE_GIBIBYTE = ONE_MEBIBYTE * 1024;
 /** 1 hour in seconds */
 static constexpr unsigned SECONDS_IN_ONE_HOUR { 60 * 60 };
 /** The maximum allowed size for a transaction before Genesis, in bytes*/
-static const uint64_t MAX_TX_SIZE_CONSENSUS_BEFORE_GENESIS = ONE_MEGABYTE;
-/** The maximum allowed size for a transaction after Genesis (max value of uint32), in bytes */
-static const uint64_t MAX_TX_SIZE_CONSENSUS_AFTER_GENESIS = ONE_GIGABYTE;
+static const uint64_t MAX_TX_SIZE_CONSENSUS_BEFORE_GENESIS = 32 * ONE_MEGABYTE;
+/** The maximum allowed size for a transaction after Genesis, in bytes */
+static const uint64_t MAX_TX_SIZE_CONSENSUS_AFTER_GENESIS = 512 * ONE_MEGABYTE;
 /** The maximum allowed size for a block, before the UAHF */
 static const uint64_t LEGACY_MAX_BLOCK_SIZE = ONE_MEGABYTE;
 
@@ -33,7 +33,7 @@ static const uint64_t LEGACY_MAX_BLOCK_SIZE = ONE_MEGABYTE;
  * The maximum allowed number of signature check operations per MB in a block
  * (network rule).
  */
-static const uint64_t MAX_BLOCK_SIGOPS_PER_MB_BEFORE_GENESIS = 20000;
+static const uint64_t MAX_BLOCK_SIGOPS_PER_MB_BEFORE_GENESIS = 50000;
 
 // Maximum number of non-push operations per script before GENESIS
 static const uint64_t MAX_OPS_PER_SCRIPT_BEFORE_GENESIS = 500;
@@ -70,7 +70,7 @@ static const uint64_t MAX_COINBASE_SCRIPTSIG_SIZE = 100;
  * Coinbase transaction outputs can only be spent after this number of new
  * blocks (network rule).
  */
-static const int COINBASE_MATURITY = 100;
+static const int COINBASE_MATURITY = 50;
 /** Activation time for P2SH (April 1st 2012) */
 static const int64_t P2SH_ACTIVATION_TIME = 1333234914;
 

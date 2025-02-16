@@ -34,10 +34,11 @@ namespace task{class CCancellationToken;}
 
 /** Default max block size parameters
  */
-static const uint64_t MAIN_DEFAULT_MAX_BLOCK_SIZE = INT64_MAX; 
-static const uint64_t REGTEST_DEFAULT_MAX_BLOCK_SIZE = INT64_MAX;
-static const uint64_t TESTNET_DEFAULT_MAX_BLOCK_SIZE = INT64_MAX;
-static const uint64_t STN_DEFAULT_MAX_BLOCK_SIZE = INT64_MAX;
+// Modified block size limits for new blockchain
+static const uint64_t MAIN_DEFAULT_MAX_BLOCK_SIZE = 1024 * ONE_MEGABYTE; // 1GB
+static const uint64_t REGTEST_DEFAULT_MAX_BLOCK_SIZE = 1024 * ONE_MEGABYTE;
+static const uint64_t TESTNET_DEFAULT_MAX_BLOCK_SIZE = 1024 * ONE_MEGABYTE;
+static const uint64_t STN_DEFAULT_MAX_BLOCK_SIZE = 1024 * ONE_MEGABYTE;
 
 
 /** Default before and after max generated block size parameters and their activation times.
@@ -65,7 +66,7 @@ static const Amount DEFAULT_BLOCK_MIN_TX_FEE(500);
 /** The maximum size for transactions we're willing to relay/mine - before genesis*/
 static const uint64_t MAX_TX_SIZE_POLICY_BEFORE_GENESIS = 100000 - 1; // -1 because pre genesis policy validation was >=
 /** The default size for transactions we're willing to relay/mine */
-static const uint64_t DEFAULT_MAX_TX_SIZE_POLICY_AFTER_GENESIS = 10 * ONE_MEGABYTE;
+static const uint64_t DEFAULT_MAX_TX_SIZE_POLICY_AFTER_GENESIS = 100 * ONE_MEGABYTE;
 /** The default minimum input (previous output) ScriptPubKey size to output ScriptPubKey size ratio to qualify for consolidation transaction */
 static const uint64_t DEFAULT_MIN_CONSOLIDATION_FACTOR = 20;
 /** The default maximum size for input scriptSig in a consolidation transaction */
