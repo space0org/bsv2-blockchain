@@ -1,0 +1,42 @@
+version: '3'
+services:
+  node1:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    volumes:
+      - ../../config/nodes:/bsv2/config/nodes
+      - node1_data:/data/bsv2
+    ports:
+      - "8443:8443"
+      - "18443:18443"
+    command: bash /bsv2/deployment/scripts/init_node.sh 1
+
+  node2:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    volumes:
+      - ../../config/nodes:/bsv2/config/nodes
+      - node2_data:/data/bsv2
+    ports:
+      - "8444:8443"
+      - "18444:18443"
+    command: bash /bsv2/deployment/scripts/init_node.sh 2
+
+  node3:
+    build:
+      context: ../..
+      dockerfile: deployment/docker/Dockerfile
+    volumes:
+      - ../../config/nodes:/bsv2/config/nodes
+      - node3_data:/data/bsv2
+    ports:
+      - "8445:8443"
+      - "18445:18443"
+    command: bash /bsv2/deployment/scripts/init_node.sh 3
+
+volumes:
+  node1_data:
+  node2_data:
+  node3_data:
